@@ -23,6 +23,10 @@ To illustrate the difficulty of action classification from a suitable representa
     var canvas = document.getElementById('aniCanvas');
     var ctx = canvas.getContext('2d');
     
+	var fgColor = "#ffffff";
+	var bgColor = "#000000";
+	document.body.style.backgroundColor = bgColor;
+    document.body.style.color = fgColor;
 
 
     var idNR = false;
@@ -44,8 +48,11 @@ To illustrate the difficulty of action classification from a suitable representa
 
         counter = 1;
         erased = 0;
+
+        //ctx.fillStyle = "black";
+        //ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.globalAlpha = 0.05;
+        ctx.globalAlpha = 10.0/255.0;
         ctx.strokeStyle = "blue";
         
     }
@@ -97,20 +104,23 @@ To illustrate the difficulty of action classification from a suitable representa
             var diff = end - start; // time difference in milliseconds
             console.log(diff/1000)
             
-            ctx.strokeStyle = "white";
-            ctx.globalAlpha = 1;
+            ctx.strokeStyle = "black";
+            ctx.globalAlpha = 0.3;
             counter = 1;
             if (erased==0)
             {
-                setTimeout(function(){requestAnimationFrame(doAnimation)}, 1000);
+                setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
                 erased = 1;
             }
             else
             {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                //ctx.clearRect(0, 0, canvas.width, canvas.height);
                 idNR = ! idNR
                 init();
-                setTimeout(function(){requestAnimationFrame(doAnimation)}, 1000);
+                setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
                 erased = 0;
             }    
             
