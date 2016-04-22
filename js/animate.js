@@ -32,7 +32,7 @@ window.onload = function(e){
         //ctx.fillStyle = "black";
         //ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.globalAlpha = 20.0/255.0;
+        ctx.globalAlpha = 10.0/255.0;
         ctx.strokeStyle = "blue";
         
     }
@@ -45,9 +45,11 @@ window.onload = function(e){
             if(tID < nrFrames)
             {
                 data = dataBig[ tID ];
+
                 nrRow = data.length;
 
-                
+
+                //console.log(nrRow)
                 offSet = 1 + counter - tID;
                 //console.log(counter, tID, nrRow, offSet)            
                 for(i=0; i<nrRow;i++)
@@ -75,6 +77,12 @@ window.onload = function(e){
                 timeOutVal = 50;
             else
                 timeOutVal = 10;
+
+            if (nrRow==0)
+            {
+                timeOutVal = 0;
+                //console.log('zero row')
+            }
             setTimeout(function(){requestAnimationFrame(doAnimation)}, timeOutVal);
           
         }
