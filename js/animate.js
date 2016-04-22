@@ -32,7 +32,7 @@ window.onload = function(e){
         //ctx.fillStyle = "black";
         //ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.globalAlpha = 10.0/255.0;
+        ctx.globalAlpha = 20.0/255.0;
         ctx.strokeStyle = "blue";
         
     }
@@ -68,10 +68,11 @@ window.onload = function(e){
         //console.log("c", counter);
       // Do animation ...
         counter++;
-        if (counter < nrFrames+14) 
+        //if (counter < nrFrames+14) 
+        if (counter < nrFrames) 
         {
             if (erased == 0)
-                timeOutVal = 40;
+                timeOutVal = 50;
             else
                 timeOutVal = 10;
             setTimeout(function(){requestAnimationFrame(doAnimation)}, timeOutVal);
@@ -89,7 +90,8 @@ window.onload = function(e){
             counter = 1;
             if (erased==0)
             {
-                setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
+                //setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
+                requestAnimationFrame(doAnimation)
                 erased = 1;
             }
             else
@@ -100,7 +102,8 @@ window.onload = function(e){
                 //ctx.clearRect(0, 0, canvas.width, canvas.height);
                 idNR = ! idNR
                 init();
-                setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
+                //setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
+                requestAnimationFrame(doAnimation)
                 erased = 0;
             }    
             
