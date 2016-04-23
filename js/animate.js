@@ -40,6 +40,8 @@ window.onload = function(e){
     function doAnimation(timestamp) 
     {
 
+        var totRow = 0
+
         for(tID= Math.max(counter-14,0); tID < counter; tID++)
         {
             if(tID < nrFrames)
@@ -47,7 +49,7 @@ window.onload = function(e){
                 data = dataBig[ tID ];
 
                 nrRow = data.length;
-
+                totRow += nrRow;
 
                 //console.log(nrRow)
                 offSet = 1 + counter - tID;
@@ -70,19 +72,20 @@ window.onload = function(e){
         //console.log("c", counter);
       // Do animation ...
         counter++;
-        //if (counter < nrFrames+14) 
-        if (counter < nrFrames) 
+        if (counter < nrFrames+14) 
+        //if (counter < nrFrames) 
         {
             if (erased == 0)
                 timeOutVal = 50;
             else
                 timeOutVal = 10;
 
-            if (nrRow==0)
+            if(totRow <10)
             {
+                //console.log(totRow);
                 timeOutVal = 0;
-                //console.log('zero row')
-            }
+            }                
+
             setTimeout(function(){requestAnimationFrame(doAnimation)}, timeOutVal);
           
         }
