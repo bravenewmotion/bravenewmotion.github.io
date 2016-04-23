@@ -2,27 +2,40 @@ window.onload = function(e){
 
     var canvas = document.getElementById('aniCanvas');
     var ctx = canvas.getContext('2d');
+    ctx.font="18px Arial";    
     
-	//var fgColor = "#ffffff";
-	//var bgColor = "#000000";
-	//document.body.style.backgroundColor = bgColor;
-    //document.body.style.color = fgColor;
+
 
 
     var idNR = true;
     var nrFrames, start,counter, erased;
-    
+    var dataBig, Ffactor;
 
     function init() 
     {
         
         if(idNR)
-            dataBig= JSON.parse(dataBig0);
+        {
+            //console.log(dataBig0);
+            dataBig = JSON.parse(dataBig0);
+            //console.log(dataBig);
+            ctx.fillStyle = "red";
+            ctx.fillText("Diving",10,20);
+        }
         else
+        {
             dataBig= JSON.parse(dataBig1);
+            ctx.fillStyle = "red";
+            ctx.fillText("Swing-Bench",10,20);
+        }
+
+        Ffactor = dataBig[0];
+        //dataBig = Array.prototype.slice.call( dataBig[1] );  
+        dataBig = dataBig[1];  
             
         nrFrames = Object.keys(dataBig).length;
-        console.log(nrFrames);
+        //console.log(dataBig)
+        //console.log(nrFrames);
 
         start = +new Date(); // get unix-timestamp in milliseconds        
 
@@ -34,6 +47,7 @@ window.onload = function(e){
         
         ctx.globalAlpha = 10.0/255.0;
         ctx.strokeStyle = "blue";
+
         
     }
 
@@ -46,7 +60,9 @@ window.onload = function(e){
         {
             if(tID < nrFrames)
             {
-                data = dataBig[ tID ];
+                //console.log(tID)
+                //console.log(dataBig);
+                var data = dataBig[ tID ];
 
                 nrRow = data.length;
                 totRow += nrRow;
@@ -59,8 +75,8 @@ window.onload = function(e){
                     fNr = data[i][0];
                     //console.log(fNr);
                     ctx.beginPath()                    
-                    ctx.moveTo((fNr+offSet-1) * 14, data[i][offSet-1]) ;
-                    ctx.lineTo((fNr+offSet) * 14, data[i][offSet]); 
+                    ctx.moveTo((fNr+offSet-1) * Ffactor, data[i][offSet-1]) ;
+                    ctx.lineTo((fNr+offSet) * Ffactor, data[i][offSet]); 
                     ctx.closePath();
                     ctx.stroke();            
                 }
@@ -109,6 +125,7 @@ window.onload = function(e){
             {
             
                 ctx.fillStyle = "black";
+                ctx.globalAlpha = 1.0;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 //ctx.clearRect(0, 0, canvas.width, canvas.height);
                 idNR = ! idNR
