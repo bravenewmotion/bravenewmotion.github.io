@@ -3,7 +3,7 @@ window.onload = function(e){
     var canvas = document.getElementById('aniCanvas');
     var ctx = canvas.getContext('2d');
     ctx.font="18px Arial";    
-    
+    ctx.lineWidth=2;    
 
 
 
@@ -45,7 +45,7 @@ window.onload = function(e){
         //ctx.fillStyle = "black";
         //ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.globalAlpha = 10.0/255.0;
+        ctx.globalAlpha = 5.0/255.0;
         ctx.strokeStyle = "blue";
 
         
