@@ -2,18 +2,20 @@ window.onload = function(e){
 
     var canvas = document.getElementById('aniCanvas');
     var ctx = canvas.getContext('2d');
+    var actionID = 0;
     ctx.font="18px Arial";    
     ctx.lineWidth=2;    
 
-
-
-    var idNR = true;
     var nrFrames, start,counter, erased;
     var dataBig, Ffactor;
+    //console.log('id2path', id2path)
 
-    function init() 
+    function init(json) 
     {
-        
+
+        dataBig = json;        
+
+        /*
         if(idNR)
         {
             //console.log(dataBig0);
@@ -21,6 +23,7 @@ window.onload = function(e){
             //console.log(dataBig);
             ctx.fillStyle = "red";
             ctx.fillText("Diving",10,20);
+
         }
         else
         {
@@ -28,6 +31,16 @@ window.onload = function(e){
             ctx.fillStyle = "red";
             ctx.fillText("Swing-Bench",10,20);
         }
+        */
+
+        ctx.fillStyle = "red";
+
+        var actionName = id2path[actionID]
+        var i = actionName.indexOf("/data/") + "/data/".length; 
+        var j = actionName.indexOf("/IDT.json");
+
+        var txt = actionName.substring(i,j) ; 
+        ctx.fillText(txt,10,415);
 
         Ffactor = dataBig[0];
         //dataBig = Array.prototype.slice.call( dataBig[1] );  
@@ -47,6 +60,9 @@ window.onload = function(e){
         
         ctx.globalAlpha = 5.0/255.0;
         ctx.strokeStyle = "blue";
+
+        // Start animation
+        requestAnimationFrame(doAnimation);
 
         
     }
@@ -128,11 +144,11 @@ window.onload = function(e){
                 ctx.globalAlpha = 1.0;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 //ctx.clearRect(0, 0, canvas.width, canvas.height);
-                idNR = ! idNR
-                init();
-                //setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
-                requestAnimationFrame(doAnimation)
                 erased = 0;
+                doRandomFile();
+                //setTimeout(function(){requestAnimationFrame(doAnimation)}, 10);
+                //requestAnimationFrame(doAnimation)
+                
             }    
             
         
@@ -140,8 +156,25 @@ window.onload = function(e){
       
     }
 
-    init();
-    // Start animation
-    requestAnimationFrame(doAnimation);
+
+
+//    $.getJSON("http://bravenewmotion.github.io/sportsFeat/Riding-Horse/005/IDT.json", 'test', function(json) {
+//        console.log('loaded')
+//        console.log(json); // this will show the info it in firebug console
+//    });            
+
+    function doRandomFile()
+    {
+        var len = 150;
+        //console.log(len)
+        actionID = Math.floor(Math.random() * len);
+        //actionID = 5;
+        var idtURL = "http://bravenewmotion.github.io/" + id2path[actionID];
+        //console.log(idtURL)
+        //$.getJSON("http://bravenewmotion.github.io/sportsFeat/Riding-Horse/005/IDT.json", 'test', init );
+        $.getJSON(idtURL, 'test', init );
+    }
+    
+    doRandomFile();
 
 };
