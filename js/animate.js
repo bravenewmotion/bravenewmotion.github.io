@@ -40,7 +40,7 @@ window.onload = function(e){
         var j = actionName.indexOf("/IDT.json");
 
         var txt = actionName.substring(i,j) ; 
-        ctx.fillText(txt,10,415);
+        ctx.fillText('Playing now: ' + txt,10,415);
 
         Ffactor = dataBig[0];
         //dataBig = Array.prototype.slice.call( dataBig[1] );  
@@ -59,7 +59,7 @@ window.onload = function(e){
         //ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         ctx.globalAlpha = 5.0/255.0;
-        ctx.strokeStyle = "blue";
+        ctx.strokeStyle = "white";
 
         // Start animation
         requestAnimationFrame(doAnimation);
