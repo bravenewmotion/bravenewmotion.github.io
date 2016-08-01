@@ -169,7 +169,7 @@ window.onload = function(e){
         //console.log(len)
         actionID = Math.floor(Math.random() * len);
         //actionID = 5;
-        var idtURL = "http://bravenewmotion.github.io/" + id2path[actionID];
+        var idtURL = "https://bravenewmotion.github.io/" + id2path[actionID];
         //console.log(idtURL)
         //$.getJSON("http://bravenewmotion.github.io/sportsFeat/Riding-Horse/005/IDT.json", 'test', init );
         $.getJSON(idtURL, 'test', init );
